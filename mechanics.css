@@ -427,3 +427,236 @@ a {
         width: 100%;
     }
 }
+
+body.gallery-open {
+    overflow: hidden;
+}
+
+.gallery-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 32px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.gallery-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.gallery-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 6, 8, 0.82);
+    backdrop-filter: blur(12px);
+}
+
+.gallery-panel {
+    position: relative;
+    z-index: 1;
+    width: min(1100px, 100%);
+    max-height: 88vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 72px 88px 32px;
+    border: 1px solid var(--border-strong);
+    border-radius: 32px;
+    background: linear-gradient(180deg, rgba(9, 19, 23, 0.98), rgba(9, 17, 20, 0.9));
+    box-shadow: var(--shadow);
+    scrollbar-gutter: stable;
+}
+
+.gallery-stage {
+    width: 100%;
+    display: grid;
+    gap: 18px;
+    justify-items: center;
+}
+
+.gallery-title {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.gallery-figure {
+    margin: 0;
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+}
+
+.gallery-image {
+    display: block;
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.gallery-caption {
+    margin: 0;
+    max-width: 72ch;
+    text-align: center;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.gallery-counter {
+    margin: 0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+}
+
+.gallery-close,
+.gallery-arrow {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: rgba(7, 16, 19, 0.82);
+    color: var(--text);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.gallery-close:hover,
+.gallery-close:focus-visible,
+.gallery-arrow:hover,
+.gallery-arrow:focus-visible {
+    background: rgba(112, 242, 208, 0.12);
+    border-color: var(--accent);
+}
+
+.gallery-close {
+    top: 20px;
+    right: 20px;
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.gallery-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+}
+
+.gallery-arrow-left {
+    left: 20px;
+}
+
+.gallery-arrow-right {
+    right: 20px;
+}
+
+.gallery-arrow:hover,
+.gallery-arrow:focus-visible {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.info-panel {
+    width: min(980px, 100%);
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 72px 40px 40px;
+    scrollbar-gutter: stable;
+}
+
+.info-content {
+    width: 100%;
+}
+
+.info-content h2 {
+    margin: 12px 0 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.info-intro {
+    margin-top: 18px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 70ch;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.info-block {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.info-block h3 {
+    margin: 0 0 10px;
+    color: var(--accent);
+}
+
+.info-block p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+@media (max-width: 720px) {
+    .gallery-modal {
+        padding: 16px;
+    }
+
+    .gallery-panel {
+        padding: 72px 20px 24px;
+    }
+
+    .gallery-image {
+        max-height: 50vh;
+    }
+
+    .gallery-close {
+        top: 12px;
+        right: 12px;
+    }
+
+    .gallery-arrow {
+        width: 44px;
+        height: 44px;
+    }
+
+    .gallery-arrow-left {
+        left: 12px;
+    }
+
+    .gallery-arrow-right {
+        right: 12px;
+    }
+
+    .info-panel {
+        max-height: 88vh;
+        padding: 72px 20px 24px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -74,7 +74,7 @@
             <section class="section" id="projects">
                 <div class="section-heading">
                     <p class="eyebrow">Work</p>
-                    <h2>Projects built around progression, player choice, and moment-to-moment clarity.</h2>
+                    <h2>Early design prototype | Unity | Blender | Solo project</h2>
                 </div>
 
                 <div class="projects-grid">
@@ -89,7 +89,10 @@
                             <li>Created a simple enough character creation screen tied to lore</li>
                             <li>Innovative combat and attribute creation based on cards of fate</li>
                         </ul>
-                    </article>
+                        <nav class="sidebar-nav">
+                            <a href="#" data-open-gallery="cr">Pictures</a>
+                            <a href="#" data-open-details="cr">Work</a>
+                        </nav>
                     </article>
                 </div>
             </section>
@@ -129,7 +132,7 @@
                     <span class="skill-pill">Systems design</span>
                     <span class="skill-pill">Combat design</span>
                     <span class="skill-pill">Progression pacing</span>
-                    <span class="skill-pill">UI/UX</span>
+                    <span class="skill-pill">UX/UI</span>
                     <span class="skill-pill">Documentation handling</span>
                 </div>
             </section>
@@ -140,7 +143,264 @@
                 <p>If you need a trustworthy and liable candidate you can find me on LinkedIn down below.</p>
                 <a href="https://www.linkedin.com/in/kristian-almgren" target="_blank" rel="noreferrer">LinkedIn</a>
             </section>
-        </main>
+                </main>
     </div>
+
+    <div class="gallery-modal" id="gallery-modal" aria-hidden="true">
+        <div class="gallery-backdrop" data-close-modal></div>
+
+        <div class="gallery-panel" role="dialog" aria-modal="true" aria-labelledby="gallery-title">
+            <button class="gallery-close" type="button" aria-label="Close gallery" data-close-modal>&times;</button>
+            <button class="gallery-arrow gallery-arrow-left" type="button" aria-label="Previous picture" data-gallery-prev>&#10094;</button>
+
+            <div class="gallery-stage">
+                <p class="eyebrow">Project Gallery</p>
+                <h2 class="gallery-title" id="gallery-title"></h2>
+
+                <figure class="gallery-figure">
+                    <img class="gallery-image" src="" alt="">
+                    <figcaption class="gallery-caption"></figcaption>
+                </figure>
+
+                <p class="gallery-counter"></p>
+            </div>
+
+            <button class="gallery-arrow gallery-arrow-right" type="button" aria-label="Next picture" data-gallery-next>&#10095;</button>
+        </div>
+    </div>
+
+    <div class="gallery-modal info-modal" id="details-modal" aria-hidden="true">
+        <div class="gallery-backdrop" data-close-modal></div>
+
+        <div class="gallery-panel info-panel" role="dialog" aria-modal="true" aria-labelledby="details-title">
+            <button class="gallery-close" type="button" aria-label="Close project details" data-close-modal>&times;</button>
+
+            <div class="info-content">
+                <p class="eyebrow">Project Breakdown</p>
+                <h2 class="details-title" id="details-title"></h2>
+                <p class="info-intro"></p>
+                <div class="info-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projectData = {
+            cr: {
+                title: "Crystalline Requiem: Innocence",
+                images: [
+                    {
+                        src: "images/cr-1.png",
+                        alt: "Crystalline Requiem character creation screen",
+                        caption: "Character affiliation screen. This is where the player starts to understand how identity and lore connect. It was made with the purpose of having war being waged and trust to be able to be built, because some factions hate others and vice versa."
+                    },
+                    {
+                        src: "images/cr-2.png",
+                        alt: "Crystalline Requiem race and faction screen",
+                        caption: "Character affiliation screen. This is where the player starts to understand how identity and lore connect. It was made with the purpose of having war being waged and trust to be able to be built, because some factions hate others and vice versa."
+                    },
+                    {
+                        src: "images/cr-3.png",
+                        alt: "Crystalline Requiem gameplay overview",
+                        caption: "A brief gameplay view showing health, mana, and spirit, which help define combat expectations."
+                    },
+                    {
+                        src: "images/cr-4.png",
+                        alt: "Crystalline Requiem talent system",
+                        caption: "“Players spend talent points on stat increases and ability unlocks. I separated direct stat growth from ability acquisition so progression could offer both numerical improvements and new combat options."
+                    },
+                    {
+                        src: "images/cr-5.png",
+                        alt: "Crystalline Requiem attribute system",
+                        caption: "“The card system provides a second progression layer alongside talents. Cards modify attributes and unlock effects, allowing players to shape their build without relying entirely on a traditional skill tree."
+                    },
+                    {
+                        src: "images/cr-6.png",
+                        alt: "Crystalline Requiem creature design",
+                        caption: "Creature design direction. Enemies reflect the biome and world theme, such as scorched variants in fire regions or rotten variants in corrupted areas."
+                    }
+                ],
+                intro: "Challenges and problems I faced creating this prototype for my application to Futuregames",
+                sections: [
+                    {
+                        heading: "Challenge",
+                        text: "The main challenge was creating enough player freedom to support different playstyles without making the progression system overly complex. I also wanted player choices, character customization, and kingdom affiliation to meaningfully affect the adventure."
+                    },
+                    {
+                        heading: "Goals",
+                        text: "The goal was to create an adventure-focused RPG prototype with multiple forms of progression. Players would improve their character through combat, abilities, equipment, talents, and other systems, allowing them to tackle increasingly difficult areas and opponents."
+                    },
+                    {
+                        heading: "Problems",
+                        text: "Because this was an application prototype created with limited development time and art resources, I focused on demonstrating the underlying systems rather than producing final-quality assets."
+                    },
+                    {
+                        heading: "What I Designed",
+                        text: "I designed how the combat system would work and how the character would progressively gain more stats to go on to harder places to fight tougher opponents to eventually conquer."
+                    },
+                    {
+                        heading: "Design Focus",
+                        text: "Lore, how the game interacts with the player and how the player's choices alter the game. Combat, how the player deal and take damage and how abilities and spells are used. System, with talents and cards to increase stats there will be a progression to become stronger."
+                    },
+                ]
+            }
+        };
+
+        const galleryModal = document.getElementById("gallery-modal");
+        const detailsModal = document.getElementById("details-modal");
+
+        const galleryTitle = galleryModal.querySelector(".gallery-title");
+        const galleryImage = galleryModal.querySelector(".gallery-image");
+        const galleryCaption = galleryModal.querySelector(".gallery-caption");
+        const galleryCounter = galleryModal.querySelector(".gallery-counter");
+        const galleryPrev = galleryModal.querySelector("[data-gallery-prev]");
+        const galleryNext = galleryModal.querySelector("[data-gallery-next]");
+
+        const detailsTitle = detailsModal.querySelector(".details-title");
+        const detailsIntro = detailsModal.querySelector(".info-intro");
+        const detailsGrid = detailsModal.querySelector(".info-grid");
+
+        let activeModal = null;
+        let activeProjectKey = null;
+        let currentImageIndex = 0;
+
+        function openModal(modal) {
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.classList.add("gallery-open");
+            activeModal = modal;
+        }
+
+        function closeModal(modal) {
+            if (!modal) {
+                return;
+            }
+
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("gallery-open");
+
+            if (activeModal === modal) {
+                activeModal = null;
+            }
+        }
+
+        function renderGallery() {
+            const project = projectData[activeProjectKey];
+
+            if (!project || !project.images.length) {
+                return;
+            }
+
+            const image = project.images[currentImageIndex];
+
+            galleryTitle.textContent = project.title;
+            galleryImage.src = image.src;
+            galleryImage.alt = image.alt;
+            galleryCaption.textContent = image.caption || "";
+            galleryCounter.textContent = (currentImageIndex + 1) + " / " + project.images.length;
+
+            const multipleImages = project.images.length > 1;
+            galleryPrev.hidden = !multipleImages;
+            galleryNext.hidden = !multipleImages;
+        }
+
+        function renderDetails() {
+            const project = projectData[activeProjectKey];
+
+            if (!project) {
+                return;
+            }
+
+            detailsTitle.textContent = project.title;
+            detailsIntro.textContent = project.intro;
+            detailsGrid.innerHTML = "";
+
+            project.sections.forEach((section) => {
+                const block = document.createElement("section");
+                block.className = "info-block";
+
+                const heading = document.createElement("h3");
+                heading.textContent = section.heading;
+
+                const body = document.createElement("p");
+                body.textContent = section.text;
+
+                block.appendChild(heading);
+                block.appendChild(body);
+                detailsGrid.appendChild(block);
+            });
+        }
+
+        document.querySelectorAll("[data-open-gallery]").forEach((link) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+
+                const projectKey = link.dataset.openGallery;
+
+                if (!projectData[projectKey]) {
+                    return;
+                }
+
+                activeProjectKey = projectKey;
+                currentImageIndex = 0;
+                renderGallery();
+                openModal(galleryModal);
+            });
+        });
+
+        document.querySelectorAll("[data-open-details]").forEach((link) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+
+                const projectKey = link.dataset.openDetails;
+
+                if (!projectData[projectKey]) {
+                    return;
+                }
+
+                activeProjectKey = projectKey;
+                renderDetails();
+                openModal(detailsModal);
+            });
+        });
+
+        document.querySelectorAll("[data-close-modal]").forEach((button) => {
+            button.addEventListener("click", () => {
+                closeModal(button.closest(".gallery-modal"));
+            });
+        });
+
+        galleryPrev.addEventListener("click", () => {
+            const imageCount = projectData[activeProjectKey].images.length;
+            currentImageIndex = (currentImageIndex - 1 + imageCount) % imageCount;
+            renderGallery();
+        });
+
+        galleryNext.addEventListener("click", () => {
+            const imageCount = projectData[activeProjectKey].images.length;
+            currentImageIndex = (currentImageIndex + 1) % imageCount;
+            renderGallery();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (!activeModal) {
+                return;
+            }
+
+            if (event.key === "Escape") {
+                closeModal(activeModal);
+                return;
+            }
+
+            if (activeModal === galleryModal && event.key === "ArrowLeft") {
+                galleryPrev.click();
+            }
+
+            if (activeModal === galleryModal && event.key === "ArrowRight") {
+                galleryNext.click();
+            }
+        });
+    </script>
 </body>
 </html>
